@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Wheal Spner</title>
+  </head>
+  <body>
+    <div class="login__main__container">
+      <div class="login-container">
+        <h2>Welcome</h2>
+        <form id="loginForm">
+          <input type="text" id="name" placeholder="Your Name" required />
+          <input type="email" id="email" placeholder="Your Email" required />
+          <button id="submit__btn" type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="wheel__spin__container">
+      <div class="confetti__img">
+        <img src="img/Wedding Love Sticker by Pops of Pretty.gif" alt="" />
+      </div>
+      <div class="wheel__container">
+        <button id="spin">spin</button>
+        <div class="wheel">
+          <div class="slice">
+            <div class="slice__img">
+              <img
+                data-id="slice1"
+                class="images"
+                src="img/icon (1).svg"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="slice">
+            <div class="slice__img">
+              <img
+                data-id="slice2"
+                class="images"
+                src="img/icon (2).svg"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="slice">
+            <div class="slice__img">
+              <img
+                data-id="slice3"
+                class="images"
+                src="img/icon (3).svg"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="slice">
+            <div class="slice__img">
+              <img
+                data-id="slice4"
+                class="images"
+                src="img/icon (4).svg"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="slice">
+            <div class="slice__img">
+              <img
+                data-id="slice5"
+                class="images"
+                src="img/icon (5).svg"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="slice">
+            <div class="slice__img">
+              <img
+                data-id="slice6"
+                class="images"
+                src="img/icon-128x128 (1).gif"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="slice">
+            <div class="slice__img">
+              <img data-id="slice7" class="images" src="img/icon.svg" alt="" />
+            </div>
+          </div>
+          <div class="slice">
+            <div class="slice__img">
+              <img
+                data-id="slice8"
+                class="images"
+                src="img/icon-128x128.gif"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+        <div class="arrow"></div>
+        <button id="change__img">Change image</button>
+        <button id="add__slice">Add slice</button>
+      </div>
+    </div>
+    <div id="winnerModal" class="modal">
+      <div class="modal-content">
+        <img id="winnerImage" src="" alt="Winner Image" />
+        <button class="close">Spin again</button>
+      </div>
+    </div>
+
+    <input type="file" id="fileInput" style="display: none" />
+
+    <script src="app.js"></script>
+  </body>
+</html>
