@@ -39,13 +39,10 @@ spinBtn.addEventListener("click", () => {
   curentDeg += randomDeg;
   wheel.style.transition = "transform 5s ease-out";
   wheel.style.transform = `rotate(${curentDeg}deg)`;
-
-  confettiImg.style.display = "none";
 });
 
 wheel.addEventListener("transitionend", () => {
   confettiImg.style.display = "flex";
-
   setTimeout(() => {
     confettiImg.style.display = "none";
   }, 3000);
@@ -60,27 +57,13 @@ let selectImg = false;
 
 changeButton.addEventListener("click", () => {
   selectImg = true;
-  changeButton.innerText = "Select slice";
+  changeButton.innerText = "Select slice image";
   changeButton.style.background = "#bdc3c7";
   changeButton.style.color = "black";
 });
 
-wheelImgContainer.forEach((div) => {
-  div.addEventListener("click", () => {
-    if (selectImg) {
-      activeImg = div.querySelector(".images");
-      changeButton.innerText = "Change image";
-      changeButton.style.background = "#242ffa";
-      changeButton.style.color = "white";
-      fileInput.click();
-      selectImg = false;
-    }
-  });
-});
-
 fileInput.addEventListener("change", (event) => {
   const file = event.target.files[0];
-
   if (file && activeImg) {
     const reader = new FileReader();
     reader.onload = function (e) {
@@ -88,7 +71,6 @@ fileInput.addEventListener("change", (event) => {
       const imgId = activeImg.dataset.id;
       localStorage.setItem(imgId, e.target.result);
     };
-
     reader.readAsDataURL(file);
   }
 });
@@ -101,6 +83,8 @@ window.addEventListener("load", () => {
       img.src = savedImg;
     }
   });
+
+  updateWheelRotation();
 });
 
 const modal = document.getElementById("winnerModal");
@@ -121,8 +105,97 @@ wheel.addEventListener("transitionend", () => {
   const sliceCount = slices.length;
   const degPerSlice = 360 / sliceCount;
   const actualDeg = curentDeg % 360;
-  const winnerIndex =
-    Math.floor((360 - actualDeg) / degPerSlice + 7) % sliceCount;
+  const winnerIndex = Math.floor((360 - actualDeg) / degPerSlice) % sliceCount;
   const winnerImgSrc = slices[winnerIndex].src;
   showWinnerModal(winnerImgSrc);
+});
+
+function updateWheelRotation() {
+  const allSlices = document.querySelectorAll(".slice");
+  const sliceCount = allSlices.length;
+  const degPerSlice = 360 / sliceCount;
+  const skewAngle = 90 - degPerSlice;
+
+  allSlices.forEach((slice, index) => {
+    slice.style.transform = `rotate(${
+      degPerSlice * index
+    }deg) skewY(${skewAngle}deg)`;
+    const imgDiv = slice.querySelector(".slice__img");
+    imgDiv.style.transform = `skewY(${-skewAngle}deg)`;
+
+    const scale = Math.max(0.4, 1 - skewAngle / 100);
+    imgDiv.style.width = `${scale * 40}%`;
+    imgDiv.style.height = `${scale * 40}%`;
+  });
+}
+
+const addSliceBtn = document.getElementById("add__slice");
+
+addSliceBtn.addEventListener("click", () => {
+  const newSlice = document.createElement("div");
+  newSlice.classList.add("slice");
+
+  const sliceImgDiv = document.createElement("div");
+  sliceImgDiv.classList.add("slice__img");
+
+  const img = document.createElement("img");
+  img.classList.add("images");
+  img.dataset.id = `slice${
+    document.querySelectorAll(".slice__img img").length + 1
+  }`;
+
+  sliceImgDiv.appendChild(img);
+  newSlice.appendChild(sliceImgDiv);
+  wheel.appendChild(newSlice);
+
+  updateWheelRotation();
+});
+
+const removeSliceBtn = document.getElementById("remove__slice");
+const removeImgBtn = document.getElementById("remove__img");
+
+removeSliceBtn.addEventListener("click", () => {
+  const allSlices = document.querySelectorAll(".slice");
+  if (allSlices.length > 3) {
+    const lastSlice = allSlices[allSlices.length - 1];
+    lastSlice.remove();
+    updateWheelRotation();
+  }
+});
+
+selectImgRemove = null;
+
+removeImgBtn.addEventListener("click", () => {
+  selectImgRemove = true;
+  removeImgBtn.innerText = "Select slice image";
+  removeImgBtn.style.background = "#bdc3c7";
+  removeImgBtn.style.color = "black";
+});
+
+wheel.addEventListener("click", (e) => {
+  const div = e.target.closest(".slice__img");
+  if (!div) return;
+
+  if (selectImg) {
+    activeImg = div.querySelector(".images");
+    changeButton.innerText = "Change image";
+    changeButton.style.background = "#242ffa";
+    changeButton.style.color = "white";
+    fileInput.click();
+    selectImg = false;
+  }
+
+  if (selectImgRemove === true) {
+    const img = div.querySelector(".images");
+    if (img) {
+      img.src = "";
+      const imgId = img.dataset.id;
+      localStorage.removeItem(imgId);
+      div.style.border = "";
+      selectImgRemove = null;
+    }
+  }
+  removeImgBtn.innerText = "Remove Image";
+  removeImgBtn.style.background = "#242ffa";
+  removeImgBtn.style.color = "white";
 });

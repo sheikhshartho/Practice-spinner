@@ -53,7 +53,8 @@
 /* _--------------_ */
 
 .wheel__spin__container {
-  display: none;
+  /* display: none; */
+  display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -68,8 +69,7 @@
   position: relative;
   overflow: hidden;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.9);
-    /* transform: rotate(67deg); */
-
+  /* transform: rotate(67deg); */
 }
 
 .wheel__container {
@@ -95,7 +95,7 @@
 
 .confetti__img {
   width: 100%;
-  height: 100vb;
+  height: 100vh;
   position: absolute;
   display: none;
   justify-content: center;
@@ -135,6 +135,20 @@
   padding: 13px;
   position: absolute;
   left: 0;
+  bottom: 50px;
+  cursor: pointer;
+}
+
+#remove__img {
+  background: #242ffa;
+  font-size: 15px;
+  font-weight: 500;
+  color: white;
+  border: 0;
+  border-radius: 12px;
+  padding: 13px;
+  position: absolute;
+  left: 0;
   bottom: 0;
   cursor: pointer;
 }
@@ -149,43 +163,47 @@
   padding: 13px;
   position: absolute;
   right: 0;
+  bottom: 50px;
+  cursor: pointer;
+}
+
+#remove__slice {
+  background: #242ffa;
+  font-size: 15px;
+  font-weight: 500;
+  color: white;
+  border: 0;
+  border-radius: 12px;
+  padding: 13px;
+  position: absolute;
+  right: 0;
   bottom: 0;
   cursor: pointer;
 }
 
-.slice {
-  width: 50%;
-  height: 50%;
-  position: absolute;
-  border: 2.5px solid #242ffa;
-  top: 50%;
-  left: 50%;
-  transform-origin: 0% 0%;
-  text-align: center;
-  line-height: 150px;
-  font-weight: bold;
-  color: white;
-}
-
 .slice__img {
-  width: 80px;
-  height: 80px;
-  position: fixed;
-  top: 50px;
-  left: 25px;
-  border-radius: 12px ;
-  overflow: hidden;
-  transform: skewY(-45deg) rotate(67deg);
+  position: absolute;
+  top: 75px;
+  left: 20px;
+  border-radius: 12px;
+  /* overflow: hidden; */
+  /* border: 1px solid red; */
+  padding: 0;
 }
 
 .slice__img img {
+  /* border: 1px solid green; */
+  border-radius: 12px;
+  /* transform: rotate(67deg) ; */
   width: 100%;
   height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
   object-fit: cover;
   object-position: center;
-  -webkit-user-drag: none; 
+  -webkit-user-drag: none;
 }
-
 
 .modal {
   display: none;
@@ -199,7 +217,7 @@
   justify-content: center;
   align-items: center;
   /* background: url(img/Party\ Festival\ Sticker\ by\ Color\ Fest.gif); */
-  background-color: rgba(0,0,0,0.6);
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 .modal-content {
@@ -207,7 +225,7 @@
   background: white;
   padding: 20px;
   border-radius: 20px;
-  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
   text-align: center;
   animation: pop 0.3s ease;
 }
@@ -226,66 +244,57 @@
   background: #242ffa;
   border: none;
   padding: 13px;
-  border-radius: 12px;  
+  border-radius: 12px;
   margin-top: 8px;
 }
 
 @keyframes pop {
-  from { transform: scale(0.8); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
-
-
-
-
-
-
-.slice:nth-child(1) {
-  transform: rotate(0deg) skewY(45deg);
-}
-
-.slice:nth-child(2) {
-  transform: rotate(45deg) skewY(45deg);
-}
-
-.slice:nth-child(3) {
-  transform: rotate(90deg) skewY(45deg);
-}
-
-.slice:nth-child(4) {
-  transform: rotate(135deg) skewY(45deg);
-}
-
-.slice:nth-child(5) {
-  transform: rotate(180deg) skewY(45deg);
-}
-
-.slice:nth-child(6) {
-  transform: rotate(225deg) skewY(45deg);
-}
-
-.slice:nth-child(7) {
-  transform: rotate(270deg) skewY(45deg);
-}
-
-.slice:nth-child(8) {
-  transform: rotate(315deg) skewY(45deg);
+.slice {
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  border: 2.5px solid #242ffa;
+  border-bottom: 0;
+  top: 50%;
+  left: 50%;
+  transform-origin: 0% 0%;
+  text-align: center;
+  line-height: 150px;
+  font-weight: bold;
+  color: white;
+  padding: 20px;
+  overflow: hidden;
 }
 
 @media (max-width: 767px) {
   .wheel {
-    width: 300px;
-    height: 300px;
+    width: 400px;
+    height: 400px;
   }
+  .slice__img img {
+    width: 100%;
+    height: 100%;
+  }
+
   .slice__img {
-    width: 42px;
-    height: 42px;
+    width: 50px;
+    height: 50px;
     position: fixed;
-    top: -11px;
-    left: 21px;
+    top: 38px;
+    left: 16px;
+    transform: skewY(-50deg) rotate(67deg);
   }
-  #spin button {
+  #spin {
     top: 133px;
     left: 133px;
   }
