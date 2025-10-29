@@ -71,7 +71,7 @@ fileInput.addEventListener("change", (event) => {
 
       const div = activeImg.closest(".slice__img");
       const p = div.querySelector("p");
-      if (p) p.style.display = "none"; 
+      if (p) p.style.display = "none";
 
       const imgId = activeImg.dataset.id;
       localStorage.setItem(imgId, e.target.result);
@@ -80,7 +80,6 @@ fileInput.addEventListener("change", (event) => {
     saveWheelState();
   }
 });
-
 
 window.addEventListener("load", () => {
   updateWheelRotation();
@@ -96,7 +95,6 @@ window.addEventListener("load", () => {
     wheelContainer.style.display = "none";
   }
 
- 
   const savedSlices = JSON.parse(localStorage.getItem("savedWheelSlices"));
   if (savedSlices && savedSlices.length > 0) {
     const allSlices = document.querySelectorAll(".slice__img img");
@@ -110,7 +108,6 @@ window.addEventListener("load", () => {
   }
 });
 
-
 const modal = document.getElementById("winnerModal");
 const winnerImage = document.getElementById("winnerImage");
 const closeBtn = document.querySelector(".close");
@@ -121,24 +118,19 @@ function showWinnerModal(imgSrc) {
   modal.style.display = "flex";
 }
 
-
 wheel.addEventListener("transitionend", () => {
   const slices = document.querySelectorAll(".slice__img img");
   const sliceCount = slices.length;
   const degPerSlice = 360 / sliceCount;
   const actualDeg = curentDeg % 360;
-  const winnerIndex = Math.floor(360 - actualDeg / degPerSlice ) % sliceCount;
+  const winnerIndex = Math.floor(360 - actualDeg / degPerSlice) % sliceCount;
   const winnerImgSrc = slices[winnerIndex].src;
-  showWinnerModal(winnerImgSrc)
+  showWinnerModal(winnerImgSrc);
 });
 
 closeBtn.addEventListener("click", () => {
   modal.style.display = "none";
 });
-
-
-
-
 
 function updateWheelRotation() {
   const allSlices = document.querySelectorAll(".slice");
@@ -172,13 +164,10 @@ addSliceBtn.addEventListener("click", () => {
   img.classList.add("images");
   img.dataset.id = `slice${
     document.querySelectorAll(".slice__img img").length + 1
-    }`
-    const p = document.createElement("p");
-    p.innerText = "Text"; 
-    sliceImgDiv.appendChild(p);
-    
-    ;
-
+  }`;
+  const p = document.createElement("p");
+  p.innerText = "Text";
+  sliceImgDiv.appendChild(p);
   sliceImgDiv.appendChild(img);
   newSlice.appendChild(sliceImgDiv);
   wheel.appendChild(newSlice);
@@ -203,36 +192,61 @@ wheel.addEventListener("click", (e) => {
   const div = e.target.closest(".slice__img");
   if (!div) return;
 
+  const img = div.querySelector(".images");
+  const p = div.querySelector("p");
+
   if (selectText) {
-    const img = div.querySelector("img");
-    const p = div.querySelector("p");
-
     if (img) img.style.display = "none";
+    if (p) {
+      p.innerText = font.value;
+      p.style.fontSize = fontSize.value + "px";
+      p.style.display = "block";
+    } else {
+      const newP = document.createElement("p");
+      newP.innerText = font.value;
+      newP.style.fontSize = fontSize.value + "px";
+      div.appendChild(newP);
+    }
 
-  if (p) {
-    p.innerText = font.value;
-    p.style.fontSize = fontSize.value + "px";
-    p.style.display = "block"; // show it
-  } else {
-    const newP = document.createElement("p");
-    newP.innerText = font.value;
-    newP.style.fontSize = fontSize.value + "px";
-    div.appendChild(newP);
     saveWheelState();
-  }
-
 
     addTextBtn.innerText = "Add Text";
     addTextBtn.style.background = "#303030";
     addTextBtn.style.color = "white";
     selectText = false;
+    return;
+  }
+
+  if (selectImg) {
+    activeImg = div.querySelector(".images");
+
+    if (p) p.style.display = "none";
+    if (activeImg) activeImg.style.display = "block";
+
+    changeButton.innerText = "Add image";
+    changeButton.style.background = "#303030";
+    changeButton.style.color = "white";
+    fileInput.click();
+    selectImg = false;
+    saveWheelState();
+    return;
+  }
+
+  if (selectImgRemove === true) {
+    if (img) {
+      img.src = "";
+      const imgId = img.dataset.id;
+      localStorage.removeItem(imgId);
+    }
+    if (p) p.style.display = "block";
+    selectImgRemove = null;
+    removeImgBtn.innerText = "Remove Image";
+    removeImgBtn.style.background = "#303030";
+    removeImgBtn.style.color = "white";
+    saveWheelState();
+    return;
   }
 });
-
-
-
-
-
 
 const removeSliceBtn = document.getElementById("remove__slice");
 const removeImgBtn = document.getElementById("remove__img");
@@ -306,14 +320,7 @@ editOptin.addEventListener("click", () => {
 editDone.addEventListener("click", () => {
   editSection.style.display = "none";
   editOptin.style.display = "block";
-  
-;
 });
-
-
-
-
-
 
 let activeSlice = null;
 let selectSlice = false;
@@ -401,7 +408,6 @@ sImgHeigth.addEventListener("input", () => {
     saveWheelState();
   });
 });
-
 
 function saveWheelState() {
   const slices = document.querySelectorAll(".slice");
