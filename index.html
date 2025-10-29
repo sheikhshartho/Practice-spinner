@@ -4,7 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <title>Wheal Spner</title>
+    <link rel="icon" type="image/png" href="img/wheel.png" />
   </head>
   <body>
     <div class="login__main__container">
@@ -19,6 +27,7 @@
     </div>
 
     <div class="wheel__spin__container">
+      <button id="edit__opiton">Edit</button>
       <div class="confetti__img">
         <img src="img/Wedding Love Sticker by Pops of Pretty.gif" alt="" />
       </div>
@@ -28,24 +37,23 @@
           <div class="slice">
             <div class="slice__img">
               <img data-id="slice1" class="images" src="" alt="" />
+              <p>text</p>
             </div>
           </div>
           <div class="slice">
             <div class="slice__img">
               <img data-id="slice2" class="images" src="" alt="" />
+              <p>text</p>
             </div>
           </div>
           <div class="slice">
             <div class="slice__img">
               <img data-id="slice2" class="images" src="" alt="" />
+              <p>text</p>
             </div>
           </div>
         </div>
-        <div class="arrow"></div>
-        <button id="change__img">Add image</button>
-        <button id="add__slice">Add slice</button>
-        <button id="remove__slice">Remove Slice</button>
-        <button id="remove__img">Remove Image</button>
+        <div class="arrow">
       </div>
     </div>
     <div id="winnerModal" class="modal">
@@ -54,8 +62,60 @@
         <button class="close">Spin again</button>
       </div>
     </div>
-
     <input type="file" id="fileInput" style="display: none" />
+    <div class="wheel__edit__section">
+      <div class="edit__section">
+        <div class="edit__section__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+            <path
+              d="M320 576C178.6 576 64 461.4 64 320C64 178.6 178.6 64 320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576zM438 209.7C427.3 201.9 412.3 204.3 404.5 215L285.1 379.2L233 327.1C223.6 317.7 208.4 317.7 199.1 327.1C189.8 336.5 189.7 351.7 199.1 361L271.1 433C276.1 438 282.9 440.5 289.9 440C296.9 439.5 303.3 435.9 307.4 430.2L443.3 243.2C451.1 232.5 448.7 217.5 438 209.7z"
+            />
+          </svg>
+        </div>
+        <div class="slice__controlle">
+          <h4>Slice control</h4>
+          <button id="add__slice">+</button>
+          <button id="remove__slice">-</button>
+          <button class="edit__btn" id="color__cng__btn">
+            Change slice color
+          </button>
+        </div>
+        <div class="img__controlle">
+          <h4>Images control</h4>
+          <button class="edit__btn" id="change__img">Add image</button>
+          <button class="edit__btn" id="remove__img">Remove Image</button>
+          <input id="s__img__width" type="number" placeholder="width" />
+          <input id="s_img__heigth" type="number" placeholder="heigth" />
+          <input id="s__img__top" type="number" placeholder="top" />
+          <input id="s_img__left" type="number" placeholder="left" />
+        </div>
+
+        <div class="border__controlle">
+          <h4>Border control</h4>
+          <button class="edit__btn" id="border_color">
+            Change border color
+          </button>
+          <input
+            class="s__border__px"
+            type="number"
+            placeholder="Slice border px"
+          />
+          <input
+            class="w__border__px"
+            type="number"
+            placeholder="Wheal border px"
+          />
+        </div>
+        <div class="text__control">
+          <h4>Text control</h4>
+          <input id="font" type="text" placeholder="Text" />
+          <input id="font__size" type="number" placeholder="px" />
+          <button class="add__text__btn edit__btn">Add text</button>
+        </div>
+        <input id="slice__color__change" type="color" style="display: none" />
+        <input id="border__color__change" type="color" style="display: none" />
+      </div>
+    </div>
 
     <script src="app.js"></script>
   </body>
